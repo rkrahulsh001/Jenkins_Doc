@@ -1,1 +1,136 @@
 # Jenkins_Doc
+
+
+👋 1. Introduction
+
+“Aaj hum Webhooks kya hote hain, unke fayde kya hain, production me kaise use hote hain, aur Jenkins me webhook kaise configure hota hai — ye end-to-end cover karenge.”
+
+🧠 2. Webhook Kya Hota Hai? (Very Simple Explanation)
+
+“Webhook ek automatic notification system hota hai.
+Jab bhi koi event hota hai — jaise GitHub me push, PR merge — to GitHub automatically Jenkins ko ek message send karta hai.
+Is message ko hum webhook kehte hain.”
+
+👉 Event → Auto Trigger → Jenkins ko notify
+
+🎯 3. Webhook Kyu Use Karte Hain? (Benefits)
+✔ 1. Automation
+
+Build automatically start ho jata hai push karte hi.
+
+✔ 2. Real-time
+
+Code push hote hi turant Jenkins pipeline trigger.
+
+✔ 3. No Polling Required
+
+Jenkins ko bar-bar check nahi karna padta.
+
+✔ 4. Fast CI/CD
+
+Feedback cycle fast hoti hai → Faster delivery.
+
+✔ 5. Secure
+
+Secret token + HMAC signature se secure communication.
+
+🏭 4. Production Me Webhooks ka Use
+
+“Production systems me webhook use hota hai: ”
+
+✔ Auto-Deployment
+
+PR merge → Auto build → Auto deploy
+
+✔ Alerting
+
+Slack, Discord, Teams, PagerDuty me webhook.
+
+✔ Microservice Events
+
+Payment → Order service ko webhook
+Ticket booking → Notification service ko webhook
+
+✔ 3rd Party Integrations
+
+GitHub → Jenkins
+GitLab → Jenkins
+Jira → Jenkins
+Bitbucket → Jenkins
+
+🔄 5. Webhook Ka Flow (Simple)
+Developer Push  
+      ↓  
+GitHub Event  
+      ↓  
+Webhook Trigger  
+      ↓  
+Jenkins Pipeline Auto-Start  
+      ↓  
+Build → Test → Deploy
+
+
+Aap session me ye flow diagram board pe draw kar sakte ho.
+
+⚙️ 6. Jenkins Webhook Configuration (Step-by-Step Practical)
+🔵 Step 1: Jenkins Job Create
+
+New Item → Freestyle / Pipeline
+
+Source Code Management → Git add
+
+Repo URL add kare
+
+Credentials configure kare
+
+🔵 Step 2: Build Trigger Enable Kare
+
+Jenkins job → Build Triggers →
+✔ GitHub hook trigger for GITScm polling
+OR
+✔ Generic Webhook Trigger (plugin install karke)
+
+🔵 Step 3: Jenkins Webhook URL Copy
+
+Default URL:
+
+http://<jenkins-IP>:8080/github-webhook/
+
+
+Generic Plugin:
+
+http://<jenkins-IP>:8080/generic-webhook-trigger/invoke
+
+🔵 Step 4: GitHub Me Webhook Add Kare
+
+Repo → Settings → Webhooks
+
+Add Webhook
+
+Payload URL → Jenkins webhook URL
+
+Content type → application/json
+
+Secret → Jenkins me set secret
+
+Events:
+✔ Push events
+✔ Pull Request events
+
+🔵 Step 5: Webhook Test Kare
+
+GitHub:
+Settings → Webhook → Recent Deliveries (Green/Red icons)
+
+Jenkins:
+Console Output me show hoga:
+"Started by GitHub push"
+
+🧪 7. Real-Time Demo Steps (If You Want To Teach Live)
+
+Aap session me ye chhota demo kar sakte ho:
+
+✔ 1. GitHub repo me ek new file create karo
+✔ 2. Commit & push
+✔ 3. Jenkins me job auto-trigger hoga
+✔ 4. Console log me time + trigger message show hoga
